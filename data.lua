@@ -1,12 +1,14 @@
-local lightoil = data.raw["fluid"]["light-oil"]
+--[[Slurry]]
+local lithiumbrine = data.raw["fluid"]["lithium-brine"]
 local slurry = {
     type = "fluid",
     name = "nutrient-slurry",
+    icon = "__Nutrient-Slurry__/nutrient-slurry.png",
     --auto_barrel = false,--defaults to true
     icons = {
         {
-            icon = lightoil.icon,
-            --icon_size = lightoil.icon_size,
+            icon = "__Nutrient-Slurry__/nutrient-slurry.png",
+            --icon_size = lithiumbrine.icon_size,
             icon_size = 64,
             tint = {1, 1, 1, 0.9}
         },
@@ -14,7 +16,8 @@ local slurry = {
     default_temperature = 15.0,
     base_color = {1, 1, 1, 0.9},
     flow_color = {1, 1, 1, 0.9},
-    fuel_value = "5MJ"--Nutrients Yummy Value: 2MJ
+    fuel_value = "5MJ",--Nutrients Yummy Value: 2MJ
+    subgroup = "fluid"
 }
 local slurryRecipeCategory = {
     type = "recipe-category",
@@ -23,12 +26,13 @@ local slurryRecipeCategory = {
 
 data:extend{slurry, slurryRecipeCategory}
 
+--[[Slurry Biochamber]]
 local biochamber = data.raw["assembling-machine"]["biochamber"]
---table.insert(biochamber.crafting_categories, slurryRecipeCategory.name)
+table.insert(biochamber.crafting_categories, slurryRecipeCategory.name)
 local slurryBiochamber = table.deepcopy(biochamber)
 slurryBiochamber.name = "slurry-".. slurryBiochamber.name
 slurryBiochamber.minable.result = slurryBiochamber.name
---[[slurryBiochamber.energy_source = {
+slurryBiochamber.energy_source = {
     type = "fluid",
     fluid_box = {
         volume = 100,
@@ -264,7 +268,7 @@ slurryBiochamber.minable.result = slurryBiochamber.name
     },--//fluid_box
     burns_fluid = true,
     scale_fluid_usage = true
-}]]
+}
 
 local slurryBiochamberItem = table.deepcopy(data.raw["item"]["biochamber"])
 slurryBiochamberItem.name = slurryBiochamber.name
@@ -280,8 +284,28 @@ slurryBiochamberItem.order = slurryBiochamberItem.order.. "a"
 
 local slurryBiochamberRecipe = table.deepcopy(data.raw["recipe"]["biochamber"])
 slurryBiochamberRecipe.name = slurryBiochamber.name
---slurryBiochamberRecipe.category = slurryRecipeCategory.name
+slurryBiochamberRecipe.category = slurryRecipeCategory.name
 slurryBiochamberRecipe.results = {{type="item", name=slurryBiochamber.name, amount=1}}
 slurryBiochamberRecipe.enabled = true
 
 data:extend{slurryBiochamber, slurryBiochamberItem, slurryBiochamberRecipe}
+
+--[[Slurry Recipe]]
+local slurryRecipe = {
+    type = "recipe",
+    name = slurry.name,
+    category = slurryRecipeCategory.name,
+    ingredients = {
+        {type="fluid", name="water", amount=100},
+        {type="item", name="nutrients", amount=100},
+        {type="item", name="ice", amount=50}
+    },
+    results = {
+        {type="fluid", name=slurry.name, amount=100}
+    },
+    energy_required = 2,
+    enabled = true,
+    hide_from_player_crafting = true--not handcraftable
+}
+
+data:extend{slurryRecipe}
