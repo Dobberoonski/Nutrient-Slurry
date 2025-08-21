@@ -1,3 +1,3 @@
 # Nutrient-Slurry
 
-wip factorio mod
+Factorio mod
