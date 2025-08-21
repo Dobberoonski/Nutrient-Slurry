@@ -1,5 +1,4 @@
 --[[Slurry]]
-local lithiumbrine = data.raw["fluid"]["lithium-brine"]
 local slurry = {
     type = "fluid",
     name = "nutrient-slurry",
@@ -8,7 +7,6 @@ local slurry = {
     icons = {
         {
             icon = "__Nutrient-Slurry__/nutrient-slurry.png",
-            --icon_size = lithiumbrine.icon_size,
             icon_size = 64,
             tint = {1, 1, 1, 0.9}
         },
@@ -23,8 +21,21 @@ local slurryRecipeCategory = {
     type = "recipe-category",
     name = "slurry-organic"
 }
-
-data:extend{slurry, slurryRecipeCategory}
+local slurryRecipe = {
+    type = "recipe",
+    name = slurry.name,
+    category = slurryRecipeCategory.name,
+    ingredients = {
+        {type="fluid", name="water", amount=100},
+        {type="item", name="nutrients", amount=100},
+        {type="item", name="ice", amount=50}
+    },
+    results = {{type="fluid", name=slurry.name, amount=100}},
+    energy_required = 2,
+    enabled = false,
+    hide_from_player_crafting = true
+}
+data:extend{slurry, slurryRecipeCategory, slurryRecipe}
 
 --[[Slurry Biochamber]]
 local biochamber = data.raw["assembling-machine"]["biochamber"]
@@ -38,9 +49,9 @@ slurryBiochamber.energy_source = {
         volume = 100,
         pipe_connections = {
             {
-                direction = defines.direction.north,
+                direction = defines.direction.south,
                 flow_direction = "input",
-                position = {0, -1}
+                position = {0, 1}
             }
         },
         pipe_covers = {
@@ -120,7 +131,7 @@ slurryBiochamber.energy_source = {
                 }
               }
             }
-        },
+        },--//pipe_covers
         pipe_picture = {
             east = {
               layers = {
@@ -218,7 +229,7 @@ slurryBiochamber.energy_source = {
                 }
               }
             }
-        },
+        },--//pipe_picture
         pipe_picture_frozen = {
             east = {
               filename = "__space-age__/graphics/entity/biochamber/biochamber-pipes-east-1-frozen.png",
@@ -264,7 +275,7 @@ slurryBiochamber.energy_source = {
               },
               width = 44
             }
-        },
+        },--//pipe_picture_frozen
     },--//fluid_box
     burns_fluid = true,
     scale_fluid_usage = true
@@ -282,30 +293,134 @@ slurryBiochamberItem.icons = {
 slurryBiochamberItem.place_result = slurryBiochamber.name
 slurryBiochamberItem.order = slurryBiochamberItem.order.. "a"
 
-local slurryBiochamberRecipe = table.deepcopy(data.raw["recipe"]["biochamber"])
-slurryBiochamberRecipe.name = slurryBiochamber.name
-slurryBiochamberRecipe.category = slurryRecipeCategory.name
-slurryBiochamberRecipe.results = {{type="item", name=slurryBiochamber.name, amount=1}}
-slurryBiochamberRecipe.enabled = true
-
-data:extend{slurryBiochamber, slurryBiochamberItem, slurryBiochamberRecipe}
-
---[[Slurry Recipe]]
-local slurryRecipe = {
+--local slurryBiochamberRecipe = table.deepcopy(data.raw["recipe"]["biochamber"])
+slurryBiochamberRecipe = {
     type = "recipe",
-    name = slurry.name,
+    name = slurryBiochamber.name,
     category = slurryRecipeCategory.name,
     ingredients = {
-        {type="fluid", name="water", amount=100},
-        {type="item", name="nutrients", amount=100},
-        {type="item", name="ice", amount=50}
+        {type="item", name="electronic-circuit", amount=5},
+        {type="item", name="iron-plate", amount=20},
+        {type="item", name="landfill", amount=1},
+        {type="fluid", name=slurry.name, amount=5},
+        {type="item", name="pentapod-egg", amount=1}
     },
-    results = {
-        {type="fluid", name=slurry.name, amount=100}
-    },
-    energy_required = 2,
-    enabled = true,
-    hide_from_player_crafting = true--not handcraftable
+    results = {{type="item", name=slurryBiochamber.name, amount=1}},
+    energy_required = 20,
+    enabled = false,
+    hide_from_player_crafting = true
+}
+data:extend{slurryBiochamber, slurryBiochamberItem, slurryBiochamberRecipe}
+
+--[[The Engineer discovers how to freeze water!!]]
+local freezeWaterRecipe = {
+    type = "recipe",
+    name = "freeze-water",
+    category = "cryogenics",
+    ingredients = {{type="fluid", name="water", amount=10000}},
+    results = {{type="item", name="ice", amount=500}},
+    energy_required = 20,
+    enabled = false,
+    hide_from_player_crafting = true
+}
+--table.insert(data.raw["technology"]["cryogenic-plant"].effects, {type="unlock-recipe", recipe=freezeWaterRecipe.name})
+data:extend{freezeWaterRecipe}
+
+--[[Modified Gleba Recipies to use Slurry]]
+local slurryPentapodEggRecipe = table.deepcopy(data.raw["recipe"]["pentapod-egg"])
+slurryPentapodEggRecipe.name = "slurry-".. slurryPentapodEggRecipe.name
+slurryPentapodEggRecipe.category = slurryRecipeCategory.name
+slurryPentapodEggRecipe.ingredients = {
+    {type="fluid", name=slurry.name, amount=12},
+    {type="item", name="pentapod-egg", amount=1}
 }
 
-data:extend{slurryRecipe}
+local slurryAgriSciRecipe = table.deepcopy(data.raw["recipe"]["agricultural-science-pack"])
+slurryAgriSciRecipe.name = "slurry-".. slurryAgriSciRecipe.name
+slurryAgriSciRecipe.category = slurryRecipeCategory.name
+slurryAgriSciRecipe.ingredients = {
+    {type="fluid", name=slurry.name, amount=16},
+    {type="item", name="pentapod-egg", amount=1}
+}
+
+local slurryFeCultRecipe = table.deepcopy(data.raw["recipe"]["iron-bacteria-cultivation"])
+slurryFeCultRecipe.name = "slurry-".. slurryFeCultRecipe.name
+slurryFeCultRecipe.category = slurryRecipeCategory.name
+slurryFeCultRecipe.ingredients = {
+    {type="fluid", name=slurry.name, amount=16},
+    {type="item", name="iron-bacteria", amount=1}
+}
+
+local slurryCuCultRecipe = table.deepcopy(data.raw["recipe"]["copper-bacteria-cultivation"])
+slurryCuCultRecipe.name = "slurry-".. slurryCuCultRecipe.name
+slurryCuCultRecipe.category = slurryRecipeCategory.name
+slurryCuCultRecipe.ingredients = {
+    {type="fluid", name=slurry.name, amount=16},
+    {type="item", name="copper-bacteria", amount=1}
+}
+
+local slurryFishRecipe = table.deepcopy(data.raw["recipe"]["fish-breeding"])
+slurryFishRecipe.name = "slurry-".. slurryFishRecipe.name
+slurryFishRecipe.category = slurryRecipeCategory.name
+slurryFishRecipe.ingredients = {
+    {type="item", name="raw-fish", amount=2}
+}
+
+local slurryRocketFuelRecipe = table.deepcopy(data.raw["recipe"]["rocket-fuel-from-jelly"])
+slurryRocketFuelRecipe.name = "slurry".. slurryRocketFuelRecipe.name
+slurryRocketFuelRecipe.category = slurryRecipeCategory.name
+slurryRocketFuelRecipe.ingredients = {
+    {type="fluid", name=slurry.name, amount=32},
+    {type="item", name="jelly", amount=30}
+}
+
+local slurryBioplasticRecipe = table.deepcopy(data.raw["recipe"]["bioplastic"])
+slurryBioplasticRecipe.name = "slurry".. slurryBioplasticRecipe.name
+slurryBioplasticRecipe.category = slurryRecipeCategory.name
+slurryBioplasticRecipe.ingredients = {
+    {type="fluid", name=slurry.name, amount=16},
+    {type="item", name="yumako-mash", amount=4}
+}
+
+local slurryBiosulfurRecipe = table.deepcopy(data.raw["recipe"]["biosulfur"])
+slurryBiosulfurRecipe.name = "slurry".. slurryBiosulfurRecipe.name
+slurryBiosulfurRecipe.category = slurryRecipeCategory.name
+slurryBiosulfurRecipe.ingredients = {
+    {type="fluid", name=slurry.name, amount=16},
+    {type="item", name="spoilage", amount=5}
+}
+data:extend{slurryPentapodEggRecipe, slurryAgriSciRecipe, slurryFeCultRecipe, slurryCuCultRecipe, slurryFishRecipe, slurryRocketFuelRecipe, slurryBioplasticRecipe, slurryBiosulfurRecipe}
+
+--[[The Engineer discovers how to make nutrient slurry!!]]
+local slurryTechnology = {
+    type = "technology",
+    name = "slurry-processing",
+    icon = "__Nutrient-Slurry__/nutrient-slurry.png",
+    icon_size = 64,
+    unit = {
+        count = 50,
+        ingredients = {
+            {"automation-science-pack", 1},
+            {"logistic-science-pack", 1},
+            {"chemical-science-pack", 1},
+            {"production-science-pack", 1},
+            {"agricultural-science-pack", 1}
+        },
+        time = 30
+    },
+    prerequisites = {"biochamber"},
+    effects = {
+        {type="unlock-recipe", recipe=slurryRecipe.name},
+        {type="unlock-recipe", recipe=slurryBiochamberRecipe.name},
+        {type="unlock-recipe", recipe=freezeWaterRecipe.name},
+        {type="unlock-recipe", recipe=slurryPentapodEggRecipe.name},
+        {type="unlock-recipe", recipe=slurryAgriSciRecipe.name},
+        {type="unlock-recipe", recipe=slurryFeCultRecipe.name},
+        {type="unlock-recipe", recipe=slurryCuCultRecipe.name},
+        {type="unlock-recipe", recipe=slurryFishRecipe.name},
+        {type="unlock-recipe", recipe=slurryRocketFuelRecipe.name},
+        {type="unlock-recipe", recipe=slurryBioplasticRecipe.name},
+        {type="unlock-recipe", recipe=slurryBiosulfurRecipe.name}
+    }
+}
+data:extend{slurryTechnology}
