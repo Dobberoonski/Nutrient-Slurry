@@ -1,5 +1,10 @@
 ---------------------------------------------------------------------------------------------------
 Version: 1.0.0
-Date: ddmmmyyyy
+Date: 21AUG2025
   Major Features:
     - Initial mod release!!
+    - Added Nutrient Slurry, a liquid form of nutrients that does not spoil.
+    - Added the Slurry Biochamber, a variant of the Biochamber that uses Nutrient Slurry as fuel.
+    - Added alternate recipes utilizing Nutrient Slurry in lieu of Nutrients and Water.
+    - Added a recipe to the Cryogenic Plant to freeze water. It's not rocket science!
+    - Please report any bugs/suggestions!

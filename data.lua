@@ -363,6 +363,7 @@ local slurryFishRecipe = table.deepcopy(data.raw["recipe"]["fish-breeding"])
 slurryFishRecipe.name = "slurry-".. slurryFishRecipe.name
 slurryFishRecipe.category = slurryRecipeCategory.name
 slurryFishRecipe.ingredients = {
+    {type="fluid", name=slurry.name, amount=40},
     {type="item", name="raw-fish", amount=2}
 }
 
@@ -408,11 +409,31 @@ local slurryTechnology = {
         },
         time = 30
     },
-    prerequisites = {"biochamber"},
+    prerequisites = {"agricultural-science-pack"},
     effects = {
         {type="unlock-recipe", recipe=slurryRecipe.name},
         {type="unlock-recipe", recipe=slurryBiochamberRecipe.name},
-        {type="unlock-recipe", recipe=freezeWaterRecipe.name},
+        {type="unlock-recipe", recipe=freezeWaterRecipe.name}
+    }
+}
+local slurryCraftingTechnology = {
+    type = "technology",
+    name = "slurry-crafting",
+    icon = "__Nutrient-Slurry__/nutrient-slurry.png",
+    icon_size = 64,
+    unit = {
+        count = 250,
+        ingredients = {
+            {"automation-science-pack", 1},
+            {"logistic-science-pack", 1},
+            {"chemical-science-pack", 1},
+            {"production-science-pack", 1},
+            {"agricultural-science-pack", 1}
+        },
+        time = 30
+    },
+    prerequisites = {slurryTechnology.name},
+    effects = {
         {type="unlock-recipe", recipe=slurryPentapodEggRecipe.name},
         {type="unlock-recipe", recipe=slurryAgriSciRecipe.name},
         {type="unlock-recipe", recipe=slurryFeCultRecipe.name},
@@ -423,4 +444,4 @@ local slurryTechnology = {
         {type="unlock-recipe", recipe=slurryBiosulfurRecipe.name}
     }
 }
-data:extend{slurryTechnology}
+data:extend{slurryTechnology, slurryCraftingTechnology}
