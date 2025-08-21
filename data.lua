@@ -49,9 +49,9 @@ slurryBiochamber.energy_source = {
         volume = 100,
         pipe_connections = {
             {
-                direction = defines.direction.south,
+                direction = defines.direction.north,
                 flow_direction = "input",
-                position = {0, 1}
+                position = {0, -1}
             }
         },
         pipe_covers = {
