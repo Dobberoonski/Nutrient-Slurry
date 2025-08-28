@@ -39,6 +39,7 @@ data:extend{slurry, slurryRecipeCategory, slurryRecipe}
 
 --[[Slurry Biochamber]]
 local biochamber = data.raw["assembling-machine"]["biochamber"]
+local pipe_gfx = biochamber.fluid_boxes[1]
 table.insert(biochamber.crafting_categories, slurryRecipeCategory.name)
 local slurryBiochamber = table.deepcopy(biochamber)
 slurryBiochamber.name = "slurry-".. slurryBiochamber.name
@@ -54,233 +55,13 @@ slurryBiochamber.energy_source = {
                 position = {0, -1}
             }
         },
-        pipe_covers = {
-            east = {
-              layers = {
-                {
-                  filename = "__base__/graphics/entity/pipe-covers/pipe-cover-east.png",
-                  height = 128,
-                  priority = "extra-high",
-                  scale = 0.5,
-                  width = 128
-                },
-                {
-                  draw_as_shadow = true,
-                  filename = "__base__/graphics/entity/pipe-covers/pipe-cover-east-shadow.png",
-                  height = 128,
-                  priority = "extra-high",
-                  scale = 0.5,
-                  width = 128
-                }
-              }
-            },
-            north = {
-              layers = {
-                {
-                  filename = "__base__/graphics/entity/pipe-covers/pipe-cover-north.png",
-                  height = 128,
-                  priority = "extra-high",
-                  scale = 0.5,
-                  width = 128
-                },
-                {
-                  draw_as_shadow = true,
-                  filename = "__base__/graphics/entity/pipe-covers/pipe-cover-north-shadow.png",
-                  height = 128,
-                  priority = "extra-high",
-                  scale = 0.5,
-                  width = 128
-                }
-              }
-            },
-            south = {
-              layers = {
-                {
-                  filename = "__base__/graphics/entity/pipe-covers/pipe-cover-south.png",
-                  height = 128,
-                  priority = "extra-high",
-                  scale = 0.5,
-                  width = 128
-                },
-                {
-                  draw_as_shadow = true,
-                  filename = "__base__/graphics/entity/pipe-covers/pipe-cover-south-shadow.png",
-                  height = 128,
-                  priority = "extra-high",
-                  scale = 0.5,
-                  width = 128
-                }
-              }
-            },
-            west = {
-              layers = {
-                {
-                  filename = "__base__/graphics/entity/pipe-covers/pipe-cover-west.png",
-                  height = 128,
-                  priority = "extra-high",
-                  scale = 0.5,
-                  width = 128
-                },
-                {
-                  draw_as_shadow = true,
-                  filename = "__base__/graphics/entity/pipe-covers/pipe-cover-west-shadow.png",
-                  height = 128,
-                  priority = "extra-high",
-                  scale = 0.5,
-                  width = 128
-                }
-              }
-            }
-        },--//pipe_covers
-        pipe_picture = {
-            east = {
-              layers = {
-                {
-                  filename = "__space-age__/graphics/entity/biochamber/biochamber-pipes-east-1.png",
-                  height = 56,
-                  line_length = 1,
-                  scale = 0.5,
-                  shift = {
-                    -1.140625,
-                    0.015625
-                  },
-                  width = 88
-                },
-                {
-                  draw_as_shadow = true,
-                  filename = "__space-age__/graphics/entity/biochamber/biochamber-pipes-east-shadow.png",
-                  height = 168,
-                  line_length = 1,
-                  scale = 0.5,
-                  shift = {
-                    -0.28125,
-                    1.25
-                  },
-                  width = 50
-                }
-              }
-            },
-            north = {
-              layers = {
-                {
-                  filename = "__space-age__/graphics/entity/biochamber/biochamber-pipes-north-1.png",
-                  height = 34,
-                  line_length = 1,
-                  scale = 0.5,
-                  shift = {
-                    0,
-                    0.40625
-                  },
-                  width = 52
-                },
-                {
-                  draw_as_shadow = true,
-                  filename = "__space-age__/graphics/entity/biochamber/biochamber-pipes-north-shadow.png",
-                  height = 62,
-                  line_length = 1,
-                  scale = 0.5,
-                  shift = {
-                    1.234375,
-                    0.734375
-                  },
-                  width = 200
-                }
-              }
-            },
-            south = {
-              layers = {
-                {
-                  filename = "__space-age__/graphics/entity/biochamber/biochamber-pipes-south-1.png",
-                  height = 64,
-                  line_length = 1,
-                  scale = 0.5,
-                  shift = {
-                    0,
-                    -0.671875
-                  },
-                  width = 52
-                },
-                {
-                  draw_as_shadow = true,
-                  filename = "__space-age__/graphics/entity/biochamber/biochamber-pipes-south-shadow.png",
-                  height = 62,
-                  line_length = 1,
-                  scale = 0.5,
-                  shift = {
-                    -0.8125,
-                    -0.71875
-                  },
-                  width = 206
-                }
-              }
-            },
-            west = {
-              layers = {
-                {
-                  filename = "__space-age__/graphics/entity/biochamber/biochamber-pipes-west-1.png",
-                  height = 64,
-                  line_length = 1,
-                  scale = 0.5,
-                  shift = {
-                    0.828125,
-                    -0.09375
-                  },
-                  width = 44
-                }
-              }
-            }
-        },--//pipe_picture
-        pipe_picture_frozen = {
-            east = {
-              filename = "__space-age__/graphics/entity/biochamber/biochamber-pipes-east-1-frozen.png",
-              height = 56,
-              line_length = 1,
-              scale = 0.5,
-              shift = {
-                -1.140625,
-                0.015625
-              },
-              width = 88
-            },
-            north = {
-              filename = "__space-age__/graphics/entity/biochamber/biochamber-pipes-north-1-frozen.png",
-              height = 34,
-              line_length = 1,
-              scale = 0.5,
-              shift = {
-                0,
-                0.40625
-              },
-              width = 52
-            },
-            south = {
-              filename = "__space-age__/graphics/entity/biochamber/biochamber-pipes-south-1-frozen.png",
-              height = 64,
-              line_length = 1,
-              scale = 0.5,
-              shift = {
-                0,
-                -0.671875
-              },
-              width = 52
-            },
-            west = {
-              filename = "__space-age__/graphics/entity/biochamber/biochamber-pipes-west-1-frozen.png",
-              height = 64,
-              line_length = 1,
-              scale = 0.5,
-              shift = {
-                0.828125,
-                -0.09375
-              },
-              width = 44
-            }
-        },--//pipe_picture_frozen
-    },--//fluid_box
+        pipe_covers = pipe_gfx.pipe_covers,
+        pipe_picture = pipe_gfx.pipe_picture,
+        pipe_picture_frozen = pipe_gfx.pipe_picture_frozen
+    },
     burns_fluid = true,
     scale_fluid_usage = true
 }
-
 local slurryBiochamberItem = table.deepcopy(data.raw["item"]["biochamber"])
 slurryBiochamberItem.name = slurryBiochamber.name
 slurryBiochamberItem.icons = {
@@ -292,9 +73,7 @@ slurryBiochamberItem.icons = {
 }
 slurryBiochamberItem.place_result = slurryBiochamber.name
 slurryBiochamberItem.order = slurryBiochamberItem.order.. "a"
-
---local slurryBiochamberRecipe = table.deepcopy(data.raw["recipe"]["biochamber"])
-slurryBiochamberRecipe = {
+local slurryBiochamberRecipe = {
     type = "recipe",
     name = slurryBiochamber.name,
     category = slurryRecipeCategory.name,
@@ -323,76 +102,9 @@ local freezeWaterRecipe = {
     enabled = false,
     hide_from_player_crafting = true
 }
---table.insert(data.raw["technology"]["cryogenic-plant"].effects, {type="unlock-recipe", recipe=freezeWaterRecipe.name})
 data:extend{freezeWaterRecipe}
 
---[[Modified Gleba Recipies to use Slurry]]
-local slurryPentapodEggRecipe = table.deepcopy(data.raw["recipe"]["pentapod-egg"])
-slurryPentapodEggRecipe.name = "slurry-".. slurryPentapodEggRecipe.name
-slurryPentapodEggRecipe.category = slurryRecipeCategory.name
-slurryPentapodEggRecipe.ingredients = {
-    {type="fluid", name=slurry.name, amount=12},
-    {type="item", name="pentapod-egg", amount=1}
-}
-
-local slurryAgriSciRecipe = table.deepcopy(data.raw["recipe"]["agricultural-science-pack"])
-slurryAgriSciRecipe.name = "slurry-".. slurryAgriSciRecipe.name
-slurryAgriSciRecipe.category = slurryRecipeCategory.name
-slurryAgriSciRecipe.ingredients = {
-    {type="fluid", name=slurry.name, amount=16},
-    {type="item", name="pentapod-egg", amount=1}
-}
-
-local slurryFeCultRecipe = table.deepcopy(data.raw["recipe"]["iron-bacteria-cultivation"])
-slurryFeCultRecipe.name = "slurry-".. slurryFeCultRecipe.name
-slurryFeCultRecipe.category = slurryRecipeCategory.name
-slurryFeCultRecipe.ingredients = {
-    {type="fluid", name=slurry.name, amount=16},
-    {type="item", name="iron-bacteria", amount=1}
-}
-
-local slurryCuCultRecipe = table.deepcopy(data.raw["recipe"]["copper-bacteria-cultivation"])
-slurryCuCultRecipe.name = "slurry-".. slurryCuCultRecipe.name
-slurryCuCultRecipe.category = slurryRecipeCategory.name
-slurryCuCultRecipe.ingredients = {
-    {type="fluid", name=slurry.name, amount=16},
-    {type="item", name="copper-bacteria", amount=1}
-}
-
-local slurryFishRecipe = table.deepcopy(data.raw["recipe"]["fish-breeding"])
-slurryFishRecipe.name = "slurry-".. slurryFishRecipe.name
-slurryFishRecipe.category = slurryRecipeCategory.name
-slurryFishRecipe.ingredients = {
-    {type="fluid", name=slurry.name, amount=40},
-    {type="item", name="raw-fish", amount=2}
-}
-
-local slurryRocketFuelRecipe = table.deepcopy(data.raw["recipe"]["rocket-fuel-from-jelly"])
-slurryRocketFuelRecipe.name = "slurry".. slurryRocketFuelRecipe.name
-slurryRocketFuelRecipe.category = slurryRecipeCategory.name
-slurryRocketFuelRecipe.ingredients = {
-    {type="fluid", name=slurry.name, amount=32},
-    {type="item", name="jelly", amount=30}
-}
-
-local slurryBioplasticRecipe = table.deepcopy(data.raw["recipe"]["bioplastic"])
-slurryBioplasticRecipe.name = "slurry".. slurryBioplasticRecipe.name
-slurryBioplasticRecipe.category = slurryRecipeCategory.name
-slurryBioplasticRecipe.ingredients = {
-    {type="fluid", name=slurry.name, amount=16},
-    {type="item", name="yumako-mash", amount=4}
-}
-
-local slurryBiosulfurRecipe = table.deepcopy(data.raw["recipe"]["biosulfur"])
-slurryBiosulfurRecipe.name = "slurry".. slurryBiosulfurRecipe.name
-slurryBiosulfurRecipe.category = slurryRecipeCategory.name
-slurryBiosulfurRecipe.ingredients = {
-    {type="fluid", name=slurry.name, amount=16},
-    {type="item", name="spoilage", amount=5}
-}
-data:extend{slurryPentapodEggRecipe, slurryAgriSciRecipe, slurryFeCultRecipe, slurryCuCultRecipe, slurryFishRecipe, slurryRocketFuelRecipe, slurryBioplasticRecipe, slurryBiosulfurRecipe}
-
---[[The Engineer discovers how to make nutrient slurry!!]]
+--[[Slurry Technologies]]
 local slurryTechnology = {
     type = "technology",
     name = "slurry-processing",
@@ -433,15 +145,53 @@ local slurryCraftingTechnology = {
         time = 30
     },
     prerequisites = {slurryTechnology.name},
-    effects = {
-        {type="unlock-recipe", recipe=slurryPentapodEggRecipe.name},
-        {type="unlock-recipe", recipe=slurryAgriSciRecipe.name},
-        {type="unlock-recipe", recipe=slurryFeCultRecipe.name},
-        {type="unlock-recipe", recipe=slurryCuCultRecipe.name},
-        {type="unlock-recipe", recipe=slurryFishRecipe.name},
-        {type="unlock-recipe", recipe=slurryRocketFuelRecipe.name},
-        {type="unlock-recipe", recipe=slurryBioplasticRecipe.name},
-        {type="unlock-recipe", recipe=slurryBiosulfurRecipe.name}
-    }
+    effects = {}
 }
-data:extend{slurryTechnology, slurryCraftingTechnology}
+data:extend{slurryTechnology}--slurryCraftingTechnology is deferred for alt recipes
+
+--[[Modified Gleba Recipies to use Slurry]]
+local recipesToModify = {
+    "pentapod-egg",
+    "agricultural-science-pack",
+    "iron-bacteria-cultivation",
+    "copper-bacteria-cultivation",
+    "fish-breeding",
+    --"rocket-fuel-from-jelly",
+    "bioplastic",
+    "biosulfur"
+}
+--Failed to load mods: Error while loading recipe prototype "slurry-rocket-fuel-from-jelly" (recipe):
+--Value must be a list in property tree at ROOT.recipe.slurry-rocket-fuel-from-jelly.ingredients
+for _,r in pairs(recipesToModify) do
+    altRecipe = table.deepcopy(data.raw["recipe"][r])
+    altRecipe.name = "slurry-".. altRecipe.name
+    altRecipe.category = slurryRecipeCategory.name
+    for k,v in pairs(altRecipe.ingredients) do
+        if v.name == "nutrients" then
+            v.type = "fluid"
+            v.name = slurry.name
+            v.amount = v.amount * 2 / 5
+        end
+        if v.name == "bioflux" then
+            v.type = "fluid"
+            v.name = slurry.name
+            v.amount = v.amount * 16
+        end
+        if v.name == "water" then
+            altRecipe.ingredients[k] = nil
+        end
+    end
+    data:extend{altRecipe}
+    table.insert(slurryCraftingTechnology.effects, {type="unlock-recipe", recipe=altRecipe.name})
+end
+--Manual workaround. Why tf am i getting the above error?
+local altRktFuelRecipe = table.deepcopy(data.raw["recipe"]["rocket-fuel-from-jelly"])
+altRktFuelRecipe.name = "slurry-".. altRktFuelRecipe.name
+altRktFuelRecipe.category = slurryRecipeCategory.name
+altRktFuelRecipe.ingredients = {
+    {type="fluid", name=slurry.name, amount=32},
+    {type="item", name="jelly", amount=30}
+}
+data:extend{altRktFuelRecipe}
+table.insert(slurryCraftingTechnology.effects, {type="unlock-recipe", recipe=altRktFuelRecipe.name})
+data:extend{slurryCraftingTechnology}

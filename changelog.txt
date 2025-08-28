@@ -1,4 +1,12 @@
 ---------------------------------------------------------------------------------------------------
+Version: 1.0.2
+Date: 28AUG2025
+  Localization:
+    - Fixes for recipe names
+  Code Refactor:
+    - fluid_box simplified
+    - Recipe modification is more automated
+---------------------------------------------------------------------------------------------------
 Version: 1.0.1
 Date: 21AUG2025
   Localization:
