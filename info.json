@@ -1,15 +1,15 @@
 {
     "name": "Nutrient-Slurry",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "title": "Nutrient Slurry",
     "author": "Dobberoonski",
     "contact": "versericaw@gmail.com",
     "homepage": "https://github.com/Dobberoonski",
     "description": "Pasteurize nutrients into a delicious slurry that doesn't spoil!",
-    "factorio_version": "2.0",
+    "factorio_version": "2.1",
     "dependencies": [
-        "base >= 2.0.60",
-        "space-age >= 2.0.60"
+        "base >= 2.1.22",
+        "space-age >= 2.1.22"
     ],
     "quality_required": true,
     "rail_bridges_required": true,

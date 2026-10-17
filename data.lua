@@ -22,9 +22,11 @@ local slurryRecipeCategory = {
     name = "slurry-organic"
 }
 local slurryRecipe = {
+--Factorio 2.1 Change category:str\categories:table:str
     type = "recipe",
     name = slurry.name,
-    category = slurryRecipeCategory.name,
+    --category = slurryRecipeCategory.name,
+    categories = {slurryRecipeCategory.name},
     ingredients = {
         {type="fluid", name="water", amount=100},
         {type="item", name="nutrients", amount=100},
@@ -57,7 +59,8 @@ slurryBiochamber.energy_source = {
         },
         pipe_covers = pipe_gfx.pipe_covers,
         pipe_picture = pipe_gfx.pipe_picture,
-        pipe_picture_frozen = pipe_gfx.pipe_picture_frozen
+        pipe_picture_frozen = pipe_gfx.pipe_picture_frozen,
+        filter = slurry.name--bugfix: other fluids with fuel values were allowed! whoops lol
     },
     burns_fluid = true,
     scale_fluid_usage = true
@@ -74,9 +77,11 @@ slurryBiochamberItem.icons = {
 slurryBiochamberItem.place_result = slurryBiochamber.name
 slurryBiochamberItem.order = slurryBiochamberItem.order.. "a"
 local slurryBiochamberRecipe = {
+--Factorio 2.1 Change category:str\categories:table:str
     type = "recipe",
     name = slurryBiochamber.name,
-    category = slurryRecipeCategory.name,
+    --category = slurryRecipeCategory.name,
+    categories = {slurryRecipeCategory.name},
     ingredients = {
         {type="item", name="electronic-circuit", amount=5},
         {type="item", name="iron-plate", amount=20},
@@ -93,9 +98,11 @@ data:extend{slurryBiochamber, slurryBiochamberItem, slurryBiochamberRecipe}
 
 --[[The Engineer discovers how to freeze water!!]]
 local freezeWaterRecipe = {
+--Factorio 2.1 Change category:str\categories:table:str
     type = "recipe",
     name = "freeze-water",
-    category = "cryogenics",
+    --category = "cryogenics",
+    categories = {"cryogenics"},
     ingredients = {{type="fluid", name="water", amount=10000}},
     results = {{type="item", name="ice", amount=500}},
     energy_required = 20,
@@ -165,7 +172,8 @@ local recipesToModify = {
 for _,r in pairs(recipesToModify) do
     altRecipe = table.deepcopy(data.raw["recipe"][r])
     altRecipe.name = "slurry-".. altRecipe.name
-    altRecipe.category = slurryRecipeCategory.name
+    --altRecipe.category = slurryRecipeCategory.name
+    altRecipe.categories = {slurryRecipeCategory.name}
     for k,v in pairs(altRecipe.ingredients) do
         if v.name == "nutrients" then
             v.type = "fluid"
@@ -187,7 +195,8 @@ end
 --Manual workaround. Why tf am i getting the above error?
 local altRktFuelRecipe = table.deepcopy(data.raw["recipe"]["rocket-fuel-from-jelly"])
 altRktFuelRecipe.name = "slurry-".. altRktFuelRecipe.name
-altRktFuelRecipe.category = slurryRecipeCategory.name
+--altRktFuelRecipe.category = slurryRecipeCategory.name
+altRktFuelRecipe.categories = {slurryRecipeCategory.name}
 altRktFuelRecipe.ingredients = {
     {type="fluid", name=slurry.name, amount=32},
     {type="item", name="jelly", amount=30}

@@ -1,4 +1,11 @@
 ---------------------------------------------------------------------------------------------------
+Version: 1.0.3
+Date: 17OCT2026
+  Bugfix:
+    - Fixed Slurry Biochambers accepting fluids with fuel values other than slurry.
+  Misc:
+    - Factorio version change from 2.0 to 2.1
+---------------------------------------------------------------------------------------------------
 Version: 1.0.2
 Date: 28AUG2025
   Localization:
